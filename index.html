@@ -3,85 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UCG Data | Remote Sensing Hub</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        nav {
-            background-color: #24292e;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1rem;
-            font-weight: bold;
-        }
-        main {
-            padding: 2rem;
-            text-align: center;
-        }
-        h2 {
-            color: #24292e;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            margin: 1rem 0;
-        }
-        a.file-link {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background-color: #008cba;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        a.file-link:hover {
-            background-color: #005f7d;
-        }
-        footer {
-            background-color: #24292e;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    <title>UCG Data Hub - Login</title>
 </head>
 <body>
-    <nav>
-        <a href="#">Inicio</a>
-        <a href="#archivos">Archivos</a>
-        <a href="#contacto">Contacto</a>
-    </nav>
+    <!-- Título de la página -->
+    <h1>Iniciar sesión en UCG Data Hub</h1>
 
-    <main>
-        <section id="archivos">
-            <h2>Archivos disponibles</h2>
-            <p>Aquí encontrarás archivos CSV y PDFs listos para descargar:</p>
-            <ul>
-                <li><a href="data/archivo1.csv" class="file-link" download>Descargar archivo1.csv</a></li>
-                <li><a href="data/archivo2.pdf" class="file-link" download>Descargar archivo2.pdf</a></li>
-                <li><a href="data/archivo3.csv" class="file-link" download>Descargar archivo3.csv</a></li>
-            </ul>
-        </section>
-    </main>
+    <!-- Formulario para login y registro -->
+    <div>
+        <input type="email" id="email" placeholder="Correo electrónico">
+        <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="login()">Iniciar sesión</button>
+        <button onclick="register()">Registrarse</button>
+    </div>
 
-    <footer>
-        <p>&copy; 2024 UCG Data | Remote Sensing Hub. Todos los derechos reservados.</p>
-    </footer>
+    <!-- Scripts de Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+
+    <script>
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "ATZAsyCCrQu1gQntw3EFFZCTw56P1jJaCoIO652Y",
+            authDomain: "ucg-data.firebaseapp.com",
+            projectId: "ucg-data",
+            storageBucket: "ucg-data.appspot.com",
+            messagingSenderId: "441506874679",
+            appId: "1:441506874679:web:47b9bbd6534720ee4986b2"
+        };
+
+        // Inicializa Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Función para iniciar sesión
+        function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => alert("Inicio de sesión exitoso"))
+                .catch((error) => alert("Error: " + error.message));
+        }
+
+        // Función para registrarse
+        function register() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            auth.createUserWithEmailAndPassword(email, password)
+                .then(() => alert("Usuario registrado exitosamente"))
+                .catch((error) => alert("Error: " + error.message));
+        }
+    </script>
 </body>
 </html>
