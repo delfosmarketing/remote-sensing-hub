@@ -17,13 +17,12 @@
         <button onclick="register()">Registrarse</button>
     </div>
 
-<!-- Scripts de Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <!-- Scripts de Firebase (VERSIÓN COMPATIBLE) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
-<!-- Script personalizado -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+    <!-- Script personalizado -->
+    <script>
         // Configuración de Firebase
         const firebaseConfig = {
             apiKey: "ATZAsyCCrQu1gQntw3EFFZCTw56P1jJaCoIO652Y",
@@ -35,33 +34,25 @@
         };
 
         // Inicializar Firebase
-        if (firebase) {
-            firebase.initializeApp(firebaseConfig);
-            const auth = firebase.auth();
+        firebase.initializeApp(firebaseConfig);
 
-            // Función para Registro
-            window.register = function () {
-                const email = document.getElementById("email").value;
-                const password = document.getElementById("password").value;
-                auth.createUserWithEmailAndPassword(email, password)
-                    .then(() => alert("Usuario registrado exitosamente"))
-                    .catch((error) => alert("Error: " + error.message));
-            };
-
-            // Función para Login
-            window.login = function () {
-                const email = document.getElementById("email").value;
-                const password = document.getElementById("password").value;
-                auth.signInWithEmailAndPassword(email, password)
-                    .then(() => alert("Inicio de sesión exitoso"))
-                    .catch((error) => alert("Error: " + error.message));
-            };
-        } else {
-            console.error("Firebase no se ha cargado correctamente.");
+        // Función para Registro
+        function register() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then(() => alert("Usuario registrado exitosamente"))
+                .catch((error) => alert("Error: " + error.message));
         }
-    });
-</script>
 
-
+        // Función para Login
+        function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then(() => alert("Inicio de sesión exitoso"))
+                .catch((error) => alert("Error: " + error.message));
+        }
+    </script>
 </body>
 </html>
