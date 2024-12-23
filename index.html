@@ -38,6 +38,7 @@
 
         // Función para Registro
         function register() {
+            alert("El registro de nuevos usuarios está deshabilitado. Por favor, contacta con el administrador.");
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
             firebase.auth().createUserWithEmailAndPassword(email, password)
